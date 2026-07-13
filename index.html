@@ -290,4 +290,6 @@
             imagen.src = origen;
         }
 
-function cerrarVisor() {document.getElementById("visorModal").style.display = "none";}function filtrarCatalogo(tag) {const botones = document.querySelectorAll('.filtro-opcion');botones.forEach(b => b.classList.remove('seleccionado'));event.target.classList.add('seleccionado');if(tag === 'todos') {renderizarMuestrario(registroArmazones);} else {const filtrados = registroArmazones.filter(item =>item.tipo === tag || item.material === tag);renderizarMuestrario(filtrados);}}renderizarMuestrario(registroArmazones);
+function cerrarVisor() {document.getElementById("visorModal").style.display = "none";}function filtrarCatalogo(tag) {const botones = document.querySelectorAll('.filtro-opcion');botones.forEach(b => b.classList.remove('seleccionado'));event.target.classList.add('seleccionado');if(tag === 'todos') {renderizarMuestrario(registroArmazones);} else {const filtrados = registroArmazones.filter(item =>item.tipo === tag || item.material === tag);renderizarMuestrario(filtrados);}}renderizarMuestrario(registroArmazones);     </script>
+</body>
+</html>
