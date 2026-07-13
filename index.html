@@ -5,53 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo de Lentes de Sol</title>
     <style>
-        /* Aquí puedes personalizar toda tu paleta de colores más adelante */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f6f9; /* Color de fondo de la página */
-            color: #333333; /* Color del texto principal */
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            background-color: #f8f9fa; /* Fondo gris claro */
+            color: #212529;
             margin: 0;
-            padding: 40px 20px;
+            padding: 30px 15px;
         }
         h1 {
             text-align: center;
-            color: #111111; /* Color del título */
-            font-size: 2.5rem;
-            margin-bottom: 30px;
+            font-size: 2.2rem;
+            color: #1a1a1a;
+            margin-bottom: 40px;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
         .galeria {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 25px;
             max-width: 1200px;
             margin: 0 auto;
         }
         .tarjeta-lente {
-            background-color: #ffffff; /* Fondo de cada tarjeta de lente */
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            padding: 15px;
+            background: #ffffff; /* Fondo blanco para resaltar el lente */
+            border-radius: 16px;
+            border: 1px solid #eaeaea;
+            padding: 16px;
             text-align: center;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .tarjeta-lente:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
         }
         .tarjeta-lente img {
             max-width: 100%;
-            height: 200px;
+            height: 220px;
             object-fit: cover;
-            border-radius: 8px;
-            background-color: #f9f9f9;
+            border-radius: 12px;
         }
         .nombre-lente {
-            margin-top: 12px;
+            margin-top: 15px;
             font-weight: 600;
-            font-size: 1.1rem;
-            color: #222222;
+            font-size: 1.05rem;
+            color: #333;
         }
     </style>
 </head>
@@ -60,29 +54,32 @@
     <h1>Catálogo de Lentes de Sol</h1>
 
     <div class="galeria" id="contenedor-galeria">
-        <!-- Las fotos se acomodarán aquí solas -->
+        <!-- Las fotos se cargarán aquí automáticamente -->
     </div>
 
     <script>
-        // Lista con los nombres exactos de tus fotos en GitHub
-        // Agrega aquí los nombres de tus archivos reales separados por comas
-        const nombresArchivos = [
-            "1000181875.jpg.jpeg"
-        ];
-
         const galeria = document.getElementById('contenedor-galeria');
-
-        // Genera las tarjetas visuales automáticamente
-        nombresArchivos.forEach((nombre, indice) => {
-            const tarjeta = document.createElement('div');
-            tarjeta.className = 'tarjeta-lente';
+        
+        // Lee los archivos directamente desde la raíz de tu cuenta de GitHub
+        fetch('https://github.com')
+        .then(response => response.json())
+        .then(archivos => {
+            // Filtra para mostrar solo las imágenes .jpg.jpeg que subiste
+            const imagenes = archivos.filter(archivo => archivo.name.endsWith('.jpg.jpeg'));
             
-            tarjeta.innerHTML = `
-                <img src="imagenes/${nombre}" alt="Lente ${indice + 1}" onerror="this.src='https://placehold.co'">
-                <div class="nombre-lente">Modelo ${indice + 1}</div>
-            `;
-            
-            galeria.appendChild(tarjeta);
+            imagenes.forEach((imagen, indice) => {
+                const tarjeta = document.createElement('div');
+                tarjeta.className = 'tarjeta-lente';
+                tarjeta.innerHTML = `
+                    <img src="${imagen.name}" alt="Lente" onerror="this.src='https://placehold.co'">
+                    <div class="nombre-lente">Modelo Lente ${indice + 1}</div>
+                `;
+                galeria.appendChild(tarjeta);
+            });
+        })
+        .catch(err => {
+            console.error("Error cargando fotos:", err);
+            galeria.innerHTML = "<p style='text-align:center;'>Cargando catálogo de lentes...</p>";
         });
     </script>
 
