@@ -238,27 +238,20 @@
 
     <script>
         const contenedor = document.getElementById('contenedor-muestrario');
-        let todosLosArmazones = [];
 
-        fetch('https://github.com')
-        .then(res => res.json())
-        .then(archivos => {
-            const imagenes = archivos.filter(f => f.name.endsWith('.jpg.jpeg'));
-            
-            todosLosArmazones = imagenes.map(img => {
-                return {
-                    archivo: img.name,
-                    tipo: "sol",
-                    material: "acetato"
-                };
-            });
-
-            renderizarMuestrario(todosLosArmazones);
-        })
-        .catch(err => {
-            console.error("Error cargando archivos:", err);
-            contenedor.innerHTML = "<p style='text-align:center;'>Cargando el archivo general de lentes...</p>";
-        });
+        const todosLosArmazones = [
+            { archivo: "1000091458.jpg.jpeg", tipo: "sol", material: "acetato" },
+            { archivo: "1000091459.jpg.jpeg", tipo: "sol", material: "acetato" },
+            { archivo: "1000091460.jpg.jpeg", tipo: "sol", material: "metal" },
+            { archivo: "1000091462.jpg.jpeg", tipo: "sol", material: "combinado" },
+            { archivo: "1000091463.jpg.jpeg", tipo: "sol", material: "acetato" },
+            { archivo: "1000122561.jpg.jpeg", tipo: "sol", material: "metal" },
+            { archivo: "1000122564.jpg.jpeg", tipo: "sol", material: "acetato" },
+            { archivo: "1000122565.jpg.jpeg", tipo: "sol", material: "combinado" },
+            { archivo: "1000122566.jpg.jpeg", tipo: "sol", material: "metal" },
+            { archivo: "1000122567.jpg.jpeg", tipo: "sol", material: "acetato" },
+            { archivo: "1000181875.jpg.jpeg", tipo: "sol", material: "acetato" }
+        ];
 
         function renderizarMuestrario(lista) {
             contenedor.innerHTML = "";
@@ -295,12 +288,13 @@
             if(tag === 'todos') {
                 renderizarMuestrario(todosLosArmazones);
             } else {
-                const filtrados = todosLosArmazones.filter(item => 
-                    item.tipo === tag || item.material === tag
+                const filtrados = todosLosArmazones.filter(item => item.tipo === tag || item.material === tag
                 );
                 renderizarMuestrario(filtrados);
             }
         }
+
+        renderizarMuestrario(todosLosArmazones);
     </script>
 </body>
 </html>
