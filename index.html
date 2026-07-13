@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guzmán Óptica - Catálogo</title>
+    <title>Óptica Óptica - Catálogo</title>
     <!-- Importamos la tipografía Montserrat original con variantes Black (900) y Regular (400) -->
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
@@ -11,7 +11,18 @@
     <style id="estilos-dinamicos"></style>
 </head>
 <body>
-    <header><h1>Guzmán Óptica</h1><p>Catálogo</p></header>
+    <header>
+        <h1>Guzmán Óptica</h1>
+        <p>Catálogo</p>
+        <!-- Enlaces rápidos superiores para acceso inmediato -->
+        <div class="contactos-rapidos">
+            <a href="https://wa.me" target="_blank">WhatsApp</a>
+            <span>•</span>
+            <a href="https://instagram.com" target="_blank">Instagram</a>
+            <span>•</span>
+            <a href="https://goo.gl" target="_blank">Ubicación</a>
+        </div>
+    </header>
     
     <div class="area-catalogacion">
         <button class="filtro-opcion seleccionado" onclick="filtrarCatalogo('todos')">Ver Todo</button>
@@ -26,17 +37,13 @@
     
     <div id="visorModal" class="modal-visor" onclick="this.style.display='none'"><img class="modal-imagen" id="imagenAmpliada"></div>
     
-    <!-- Enlace directo de WhatsApp en texto grande y rojo abajo -->
-    <div style="margin: 40px auto; text-align: center;">
-        <a href="https://wa.me" class="enlace-contacto-texto" target="_blank">Enviar consulta directa por WhatsApp</a>
-    </div>
-
     <footer>
         <div class="contenedor-redes">
-            <!-- Enlaces directos fijos escritos en texto para evitar bloqueos de iconos -->
-            <a href="https://instagram.com" target="_blank" title="Instagram Oficial">Instagram</a>
+            <a href="https://wa.me" target="_blank">WhatsApp</a>
             <span style="color: #bf2222; margin: 0 10px;">|</span>
-            <a href="https://goo.gl" target="_blank" title="Cómo llegar (Google Maps)">Ubicación Google Maps</a>
+            <a href="https://instagram.com" target="_blank">Instagram</a>
+            <span style="color: #bf2222; margin: 0 10px;">|</span>
+            <a href="https://goo.gl" target="_blank">Ubicación Google Maps</a>
         </div>
         <p class="texto-institucional">Muestrario de disponibilidad técnica interna. Consultas directas vía canales oficiales.</p>
         <p class="texto-institucional" style="margin-top: 10px;">&copy; 2026 Guzmán Óptica. Todos los derechos reservados.</p>
@@ -47,30 +54,34 @@
     <script src="lista.js"></script>
     
     <script>
-        // Aplicamos letras rojas, fondo blanco y separadores grises estrictamente
+        // Estilos unificados con letras rojas de marca, fondo blanco y bordes finos
         document.getElementById('estilos-dinamicos').innerHTML = `
             body { font-family: ${configuracionMarca.tipoLetra}; background: #ffffff; margin: 0; padding: 0; text-align: center; color: #bf2222; }
-            header { background: #ffffff; padding: 50px 20px 30px 20px; border-bottom: 2px solid #e5e5e5; }
+            header { background: #ffffff; padding: 50px 20px 30px 20px; border-bottom: 1px solid #e5e5e5; }
             header h1 { margin: 0 0 12px 0; font-size: 3.2rem; text-transform: uppercase; letter-spacing: 2px; color: #bf2222; font-weight: 900; }
-            header p { margin: 0; color: #bf2222; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 3px; font-weight: 400; }
+            header p { margin: 0 0 15px 0; color: #bf2222; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 3px; font-weight: 400; }
             
+            .contactos-rapidos { font-size: 0.85rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
+            .contactos-rapidos a { color: #bf2222; text-decoration: none; margin: 0 8px; transition: opacity 0.2s; }
+            .contactos-rapidos a:hover { opacity: 0.7; }
+            .contactos-rapidos span { color: #e5e5e5; }
+
             .area-catalogacion { margin: 35px 20px; }
-            .filtro-opcion { font-family: ${configuracionMarca.tipoLetra}; background: #ffffff; border: 2px solid #e5e5e5; padding: 8px 18px; margin: 5px; cursor: pointer; border-radius: 4px; font-weight: 900; font-size: 0.85rem; transition: all 0.2s; text-transform: uppercase; color: #bf2222; letter-spacing: 0.5px; }
+            .filtro-opcion { font-family: ${configuracionMarca.tipoLetra}; background: #ffffff; border: 1px solid #e5e5e5; padding: 8px 18px; margin: 5px; cursor: pointer; border-radius: 4px; font-weight: 900; font-size: 0.85rem; transition: all 0.2s; text-transform: uppercase; color: #bf2222; letter-spacing: 0.5px; }
             .filtro-opcion.seleccionado, .filtro-opcion:hover { background: #bf2222; color: #ffffff; border-color: #bf2222; }
             
             .grilla-catalogo { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 25px; max-width: 1200px; margin: 30px auto; padding: 0 20px; }
-            .celda-armazon { background: #ffffff; border: 2px solid #e5e5e5; padding: 25px; text-align: center; border-radius: 6px; }
+            .celda-armazon { background: #ffffff; border: 1px solid #e5e5e5; padding: 25px; text-align: center; border-radius: 6px; }
             .visor-imagen img { max-width: 100%; height: 160px; object-fit: contain; cursor: zoom-in; }
             .especificaciones-armazon { margin-top: 15px; font-size: 0.85rem; font-weight: 900; text-transform: uppercase; color: #bf2222; letter-spacing: 0.5px; }
             
             .modal-visor { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.98); align-items: center; justify-content: center; }
             .modal-imagen { max-width: 90%; max-height: 85%; object-fit: contain; }
             
-            .enlace-contacto-texto { font-family: ${configuracionMarca.tipoLetra}; font-size: 1.2rem; font-weight: 900; color: #bf2222; text-decoration: underline; text-transform: uppercase; letter-spacing: 1px; }
-            
-            footer { background-color: #ffffff; color: #bf2222; padding: 40px 20px; text-align: center; border-top: 2px solid #e5e5e5; margin-top: 60px; }
+            footer { background-color: #ffffff; color: #bf2222; padding: 40px 20px; text-align: center; border-top: 1px solid #e5e5e5; margin-top: 60px; }
             .contenedor-redes { margin-bottom: 20px; }
-            .contenedor-redes a { color: #bf2222; font-weight: 900; font-size: 1rem; margin: 0 10px; text-decoration: underline; text-transform: uppercase; }
+            .contenedor-redes a { color: #bf2222; font-weight: 900; font-size: 0.9rem; margin: 0 10px; text-decoration: none; text-transform: uppercase; letter-spacing: 0.5px; }
+            .contenedor-redes a:hover { opacity: 0.7; }
             .texto-institucional { font-family: ${configuracionMarca.tipoLetra}; font-size: 0.85rem; color: #bf2222; line-height: 1.6; margin: 0; font-weight: 400; opacity: 0.8; }
         `;
 
