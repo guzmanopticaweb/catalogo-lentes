@@ -142,29 +142,43 @@
     <script>
         const contenedor = document.getElementById('contenedor-muestrario');
 
-        // Este bloque lee tus archivos directamente desde tu cuenta de GitHub de forma automática
-        fetch('https://github.com')
-        .then(res => res.json())
-        .then(archivos => {
-            // Busca solo los archivos que terminan en .jpg.jpeg
-            const imagenes = archivos.filter(f => f.name.endsWith('.jpg.jpeg'));
-            
-            // Dibuja en la pantalla cada lente que encuentra
-            imagenes.forEach((item, indice) => {
-                const celda = document.createElement('div');
-                celda.className = 'celda-armazon';
-                celda.innerHTML = `
-                    <div class="visor-imagen" onclick="abrirVisor('${item.name}')">
-                        <img src="${item.name}" alt="Lente">
-                    </div>
-                    <div class="especificaciones-armazon">Modelo ${indice + 1}</div>
-                `;
-                contenedor.appendChild(celda);
-            });
-        })
-        .catch(err => {
-            contenedor.innerHTML = "<p style='text-align:center;'>Error al cargar los armazones.</p>";
+        // Listado estático inicial de tus imágenes numéricas reales confirmadas
+        const fotosConfirmadas = [
+            "1000091458.jpg.jpeg", "1000091459.jpg.jpeg", "1000091460.jpg.jpeg", 
+            "1000091462.jpg.jpeg", "1000091463.jpg.jpeg", "1000122561.jpg.jpeg", 
+            "1000122564.jpg.jpeg", "1000122565.jpg.jpeg", "1000122566.jpg.jpeg", 
+            "1000122567.jpg.jpeg", "1000181875.jpg.jpeg"
+        ];
+
+        // Muestra las primeras fotos fijas en la pantalla
+        fotosConfirmadas.forEach((nombreArchivo, indice) => {
+            const celda = document.createElement('div');
+            celda.className = 'celda-armazon';
+            celda.innerHTML = `
+                <div class="visor-imagen" onclick="abrirVisor('${nombreArchivo}')">
+                    <img src="${nombreArchivo}" alt="Lente">
+                </div>
+                <div class="especificaciones-armazon">Modelo ${indice + 1}</div>
+            `;
+            contenedor.appendChild(celda);
         });
+
+        // Generador automático secundario para completar los 59 espacios en grilla
+        const totalLentesDeseados = 59;
+        const restantes = totalLentesDeseados - fotosConfirmadas.length;
+
+        for (let i = 0; i < restantes; i++) {
+            const numeroModelo = fotosConfirmadas.length + i + 1;
+            const celda = document.createElement('div');
+            celda.className = 'celda-armazon';
+            celda.innerHTML = `
+                <div class="visor-imagen">
+                    <img src="https://placehold.co{numeroModelo}" alt="Lente vacío">
+                </div>
+                <div class="especificaciones-armazon">Modelo ${numeroModelo}</div>
+            `;
+            contenedor.appendChild(celda);
+        }
 
         function abrirVisor(origen) {
             document.getElementById("visorModal").style.display = "flex";
