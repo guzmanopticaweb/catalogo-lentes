@@ -30,20 +30,23 @@
     
     <footer>
         <div class="contenedor-redes">
+            <!-- Enlaces nativos fijos escritos directamente para evitar bloqueos del navegador -->
             <a href="https://wa.me." target="_blank">WhatsApp</a>
             <span style="color: #bf2222; margin: 0 10px;">|</span>
             <a href="https://instagram.com" target="_blank">Instagram</a>
             <span style="color: #bf2222; margin: 0 10px;">|</span>
-            <a href="https://share.google" target="_blank">Ubicación Google Maps</a>
+            <a href="https://goo.gl" target="_blank">Ubicación Google Maps</a>
         </div>
         <p class="texto-institucional">Muestrario de disponibilidad técnica interna. Consultas directas vía canales oficiales.</p>
         <p class="texto-institucional" style="margin-top: 10px;">&copy; 2026 Guzmán Óptica. Todos los derechos reservados.</p>
     </footer>
 
+    <!-- Conexión segura con tus módulos independientes -->
     <script src="configuracion.js"></script>
     <script src="lista.js"></script>
     
     <script>
+        // Aplicamos el diseño de marca obligatorio inyectando tus parámetros estéticos
         document.getElementById('estilos-dinamicos').innerHTML = `
             body { font-family: ${configuracionMarca.tipoLetra}; background: #ffffff; margin: 0; padding: 0; text-align: center; color: #bf2222; }
             header { background: #ffffff; padding: 50px 20px 30px 20px; border-bottom: 1px solid #e5e5e5; }
@@ -69,6 +72,7 @@
             .texto-institucional { font-family: ${configuracionMarca.tipoLetra}; font-size: 0.85rem; color: #bf2222; line-height: 1.6; margin: 0; font-weight: 400; opacity: 0.8; }
         `;
 
+        // Sistema de carga del muestrario de armazones
         const contenedor = document.getElementById('contenedor-muestrario');
         function renderizarMuestrario(lista) {
             contenedor.innerHTML = "";
