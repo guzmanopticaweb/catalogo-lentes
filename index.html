@@ -25,12 +25,13 @@
     <div class="grilla-catalogo" id="contenedor-muestrario"></div>
     <div id="visorModal" class="modal-visor" onclick="this.style.display='none'"><img class="modal-imagen" id="imagenAmpliada"></div>
     
-    <a href="#" id="link-wpp" class="btn-whatsapp-flotante" target="_blank" title="Consultar por WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <!-- Conexión directa y fija con tus datos reales de la óptica -->
+    <a href="https://wa.me" class="btn-whatsapp-flotante" target="_blank" title="Consultar por WhatsApp"><i class="fab fa-whatsapp"></i></a>
 
     <footer>
         <div class="contenedor-redes">
-            <a href="#" id="link-ig" target="_blank" title="Instagram Oficial"><i class="fab fa-instagram"></i></a>
-            <a href="#" id="link-maps" target="_blank" title="Cómo llegar (Google Maps)"><i class="fas fa-map-marker-alt"></i></a>
+            <a href="https://instagram.com" target="_blank" title="Instagram Oficial"><i class="fab fa-instagram"></i></a>
+            <a href="https://goo.gl" target="_blank" title="Cómo llegar (Google Maps)"><i class="fas fa-map-marker-alt"></i></a>
         </div>
         <p class="texto-institucional"><i class="fas fa-info-circle"></i> Muestrario de disponibilidad técnica interna. Consultas directas vía canales oficiales.</p>
         <p class="texto-institucional" style="margin-top: 10px;">&copy; 2026 Guzmán Óptica. Todos los derechos reservados.</p>
@@ -63,11 +64,6 @@
             .contenedor-redes a { color: ${configuracionMarca.colorPrincipal}; font-size: 24px; margin: 0 20px; text-decoration: none; }
             .texto-institucional { font-family: ${configuracionMarca.tipoLetra}; font-size: 0.85rem; color: ${configuracionMarca.colorTextoSecundario}; line-height: 1.6; margin: 0; font-weight: 400; }
         `;
-
-        // Vinculación automática de enlaces
-        document.getElementById('link-wpp').href = `https://wa.me{configuracionMarca.numeroWhatsApp}`;
-        document.getElementById('link-ig').href = `https://instagram.com{configuracionMarca.usuarioInstagram}`;
-        document.getElementById('link-maps').href = configuracionMarca.enlaceGoogleMaps;
 
         // Lógica de carga de armazones
         const contenedor = document.getElementById('contenedor-muestrario');
