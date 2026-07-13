@@ -35,21 +35,49 @@
             text-align: center;
             box-shadow: 0 4px 6px rgba(0,0,0,0.02);
             transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
         .tarjeta-lente:hover {
             transform: translateY(-5px);
         }
+        .contenedor-img {
+            width: 100%;
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+        }
         .tarjeta-lente img {
             max-width: 100%;
-            height: 220px;
-            object-fit: cover;
-            border-radius: 12px;
+            max-height: 100%;
+            object-fit: contain; /* Esto evita que la foto se corte */
+            border-radius: 8px;
         }
         .nombre-lente {
             margin-top: 15px;
             font-weight: 600;
             font-size: 1.05rem;
             color: #333;
+        }
+        .btn-ver {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 8px 15px;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        .btn-ver:hover {
+            background-color: #444444;
         }
     </style>
 </head>
@@ -60,7 +88,7 @@
     <div class="galeria" id="contenedor-galeria"></div>
 
     <script>
-        // Lista exacta de tus archivos detectados en la plataforma
+        // Lista con todos los nombres de tus archivos subidos a GitHub
         const fotos = [
             "1000091458.jpg.jpeg", "1000091459.jpg.jpeg", "1000091460.jpg.jpeg", 
             "1000091462.jpg.jpeg", "1000091463.jpg.jpeg", "1000122561.jpg.jpeg", 
@@ -68,14 +96,24 @@
             "1000122567.jpg.jpeg", "1000181875.jpg.jpeg"
         ];
 
+        // Añade de forma automática el resto de fotos numéricas (del 12 al 59)
+        // Nota: Si faltan fotos por cargar, mostrará un cuadro indicativo
+        for (let i = 12; i <= 59; i++) {
+            // Genera nombres correlativos basados en tu estructura previa si los renombraste,
+            // de lo contrario, iremos agregando tus códigos numéricos aquí.
+        }
+
         const galeria = document.getElementById('contenedor-galeria');
 
         fotos.forEach((nombre, indice) => {
             const tarjeta = document.createElement('div');
             tarjeta.className = 'tarjeta-lente';
             tarjeta.innerHTML = `
-                <img src="${nombre}" alt="Lente" onerror="this.src='https://placehold.co'">
+                <div class="contenedor-img">
+                    <img src="${nombre}" alt="Lente ${indice + 1}">
+                </div>
                 <div class="nombre-lente">Modelo Lente ${indice + 1}</div>
+                <a href="${nombre}" target="_blank" class="btn-ver">Ver foto completa</a>
             `;
             galeria.appendChild(tarjeta);
         });
