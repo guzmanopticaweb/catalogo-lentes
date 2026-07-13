@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guzmán Óptica - Catálogo de Armazones</title>
+    <title>Guzmán Óptica - Archivo de Armazones</title>
     <link rel="stylesheet" href="https://cloudflare.com">
     <style>
         :root {
             --color-marca: #111111;
-            --color-detalles: #555555;
             --fondo-gris-claro: #fcfcfc;
             --borde-muestrario: #e5e5e5;
         }
@@ -37,7 +36,7 @@
         }
         .institucional-subtitulo {
             font-size: 0.95rem;
-            color: var(--color-detalles);
+            color: #555555;
             margin: 0;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -93,11 +92,12 @@
         .celda-armazon {
             background: #ffffff;
             border: 1px solid var(--borde-muestrario);
-            padding: 15px;
+            padding: 20px;
             text-align: center;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: center;
+            align-items: center;
         }
         .visor-imagen {
             width: 100%;
@@ -113,23 +113,13 @@
             max-height: 100%;
             object-fit: contain;
         }
-        .metadatos-armazon {
-            margin-top: 15px;
-            padding-top: 12px;
-            border-top: 1px dashed var(--borde-muestrario);
-        }
-        .codigo-armazon {
-            font-weight: 600;
-            font-size: 0.85rem;
-            color: #111111;
-            letter-spacing: 0.5px;
-            margin-bottom: 4px;
-        }
         .especificaciones-armazon {
-            font-size: 0.75rem;
+            margin-top: 15px;
+            font-size: 0.8rem;
             color: #666666;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
+            font-weight: 600;
         }
 
         .modal-visor {
@@ -241,43 +231,46 @@
             <a href="#" target="_blank"><i class="fas fa-map-marker-alt"></i></a>
         </div>
         <div class="bloque-direccion">
-            <p><i class="fas fa-info-circle"></i> Catálogo informativo de disponibilidad en local.</p>
+            <p><i class="fas fa-info-circle"></i> Catálogo de exhibición interna.</p>
             <p>&copy; 2026 Guzmán Óptica. Todos los derechos reservados.</p>
         </div>
     </footer>
 
     <script>
-        const registroArmazones = [
-            { archivo: "1000091458.jpg.jpeg", tipo: "sol", material: "acetato" },
-            { archivo: "1000091459.jpg.jpeg", tipo: "sol", material: "acetato" },
-            { archivo: "1000091460.jpg.jpeg", tipo: "sol", material: "metal" },
-            { archivo: "1000091462.jpg.jpeg", tipo: "sol", material: "combinado" },
-            { archivo: "1000091463.jpg.jpeg", tipo: "sol", material: "acetato" },
-            { archivo: "1000122561.jpg.jpeg", tipo: "sol", material: "metal" },
-            { archivo: "1000122564.jpg.jpeg", tipo: "sol", material: "acetato" },
-            { archivo: "1000122565.jpg.jpeg", tipo: "sol", material: "combinado" },
-            { archivo: "1000122566.jpg.jpeg", tipo: "sol", material: "metal" },
-            { archivo: "1000122567.jpg.jpeg", tipo: "sol", material: "acetato" },
-            { archivo: "1000181875.jpg.jpeg", tipo: "sol", material: "acetato" }
-        ];
-
         const contenedor = document.getElementById('contenedor-muestrario');
+        let todosLosArmazones = [];
+
+        fetch('https://github.com')
+        .then(res => res.json())
+        .then(archivos => {
+            const imagenes = archivos.filter(f => f.name.endsWith('.jpg.jpeg'));
+            
+            todosLosArmazones = imagenes.map(img => {
+                return {
+                    archivo: img.name,
+                    tipo: "sol",
+                    material: "acetato"
+                };
+            });
+
+            renderizarMuestrario(todosLosArmazones);
+        })
+        .catch(err => {
+            console.error("Error cargando archivos:", err);
+            contenedor.innerHTML = "<p style='text-align:center;'>Cargando el archivo general de lentes...</p>";
+        });
 
         function renderizarMuestrario(lista) {
             contenedor.innerHTML = "";
-            lista.forEach((item) => {
+            lista.forEach((item, indice) => {
                 const celda = document.createElement('div');
                 celda.className = 'celda-armazon';
-                const nombreLimpio = item.archivo.replace('.jpg.jpeg', '');
 
                 celda.innerHTML = `
                     <div class="visor-imagen" onclick="abrirVisor('${item.archivo}')">
                         <img src="${item.archivo}" alt="Lente">
                     </div>
-                    <div class="metadatos-armazon">
-                        <div class="codigo-armazon">Ref: #${nombreLimpio}</div>
-                        <div class="especificaciones-armazon">${item.tipo} / ${item.material}</div>
-                    </div>
+                    <div class="especificaciones-armazon">Modelo ${indice + 1}</div>
                 `;
                 contenedor.appendChild(celda);
             });
@@ -290,6 +283,24 @@
             imagen.src = origen;
         }
 
-function cerrarVisor() {document.getElementById("visorModal").style.display = "none";}function filtrarCatalogo(tag) {const botones = document.querySelectorAll('.filtro-opcion');botones.forEach(b => b.classList.remove('seleccionado'));event.target.classList.add('seleccionado');if(tag === 'todos') {renderizarMuestrario(registroArmazones);} else {const filtrados = registroArmazones.filter(item =>item.tipo === tag || item.material === tag);renderizarMuestrario(filtrados);}}renderizarMuestrario(registroArmazones);     </script>
+        function cerrarVisor() {
+            document.getElementById("visorModal").style.display = "none";
+        }
+
+        function filtrarCatalogo(tag) {
+            const botones = document.querySelectorAll('.filtro-opcion');
+            botones.forEach(b => b.classList.remove('seleccionado'));
+            event.target.classList.add('seleccionado');
+
+            if(tag === 'todos') {
+                renderizarMuestrario(todosLosArmazones);
+            } else {
+                const filtrados = todosLosArmazones.filter(item => 
+                    item.tipo === tag || item.material === tag
+                );
+                renderizarMuestrario(filtrados);
+            }
+        }
+    </script>
 </body>
 </html>
