@@ -1,12 +1,13 @@
 const configuracionMarca = {
     // ==========================================================================
-    // PALETA DE COLORES RECOMENDADA POR EL DISEÑADOR
+    // PALETA DE COLORES AJUSTADA A TU VISIÓN
     // ==========================================================================
-    colorPrincipal: "#bf2222",
-    colorFondoGeneral: "#ffffff",
-    colorFondoCeldas: "#e5e5e5",
-    colorBordes: "transparent",
-    colorTextoSecundario: "#666666",
+    colorPrincipal: "#bf2222",       // Rojo oficial para el nombre de la óptica y detalles
+    colorFondoGeneral: "#ffffff",    // Blanco puro para toda la página web (adiós al gris)
+    colorFondoCeldas: "#ffffff",     // Cuadros de lentes en blanco puro para máxima pulcritud
+    colorBordes: "#e5e5e5",          // Líneas de separación finas y muy suaves
+    colorTextoSecundario: "#666666", // Color gris oscuro sofisticado para el número de modelo
+
     // ==========================================================================
     // TIPOGRAFÍA DE MARCA
     // ==========================================================================
