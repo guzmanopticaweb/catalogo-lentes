@@ -42,45 +42,6 @@
             text-transform: uppercase;
         }
 
-        .area-catalogacion {
-            max-width: 1200px;
-            margin: 35px auto 15px auto;
-            padding: 0 20px;
-        }
-        .criterio-bloque {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 15px;
-            gap: 10px;
-        }
-        .criterio-etiqueta {
-            font-size: 0.8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #777777;
-            margin-right: 10px;
-        }
-        .filtro-opcion {
-            background: none;
-            border: 1px solid var(--borde-muestrario);
-            background-color: #ffffff;
-            padding: 6px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: #444444;
-            transition: all 0.2s ease;
-        }
-        .filtro-opcion.seleccionado, .filtro-opcion:hover {
-            background-color: var(--color-marca);
-            border-color: var(--color-marca);
-            color: #ffffff;
-        }
-
         .grilla-catalogo {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -150,24 +111,6 @@
             cursor: pointer;
         }
 
-        .acceso-whatsapp {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background-color: #25d366;
-            color: white;
-            border-radius: 50%;
-            width: 55px;
-            height: 55px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
-            z-index: 999;
-            text-decoration: none;
-        }
-
         footer {
             background-color: #ffffff;
             color: #111111;
@@ -175,20 +118,6 @@
             text-align: center;
             border-top: 1px solid var(--borde-muestrario);
             margin-top: 60px;
-        }
-        .canales-enlaces {
-            margin-bottom: 20px;
-        }
-        .canales-enlaces a {
-            color: #111111;
-            font-size: 22px;
-            margin: 0 18px;
-            text-decoration: none;
-        }
-        .bloque-direccion {
-            font-size: 0.85rem;
-            color: #555555;
-            line-height: 1.6;
         }
     </style>
 </head>
@@ -199,21 +128,6 @@
         <p class="institucional-subtitulo">Catálogo General de Armazones</p>
     </header>
 
-    <div class="area-catalogacion">
-        <div class="criterio-bloque">
-            <span class="criterio-etiqueta">Familia:</span>
-            <button class="filtro-opcion seleccionado" onclick="filtrarCatalogo('todos')">Ver Todo</button>
-            <button class="filtro-opcion" onclick="filtrarCatalogo('sol')">Lentes de Sol</button>
-            <button class="filtro-opcion" onclick="filtrarCatalogo('receta')">Lentes de Receta</button>
-        </div>
-        <div class="criterio-bloque">
-            <span class="criterio-etiqueta">Composición:</span>
-            <button class="filtro-opcion" onclick="filtrarCatalogo('acetato')">Acetato</button>
-            <button class="filtro-opcion" onclick="filtrarCatalogo('metal')">Metal</button>
-            <button class="filtro-opcion" onclick="filtrarCatalogo('combinado')">Combinado</button>
-        </div>
-    </div>
-
     <div class="grilla-catalogo" id="contenedor-muestrario"></div>
 
     <div id="visorModal" class="modal-visor" onclick="cerrarVisor()">
@@ -221,80 +135,45 @@
         <img class="modal-imagen" id="imagenAmpliada">
     </div>
 
-    <a href="https://wa.me" class="acceso-whatsapp" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
     <footer>
-        <div class="canales-enlaces">
-            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="#" target="_blank"><i class="fas fa-map-marker-alt"></i></a>
-        </div>
-        <div class="bloque-direccion">
-            <p><i class="fas fa-info-circle"></i> Catálogo de exhibición interna.</p>
-            <p>&copy; 2026 Guzmán Óptica. Todos los derechos reservados.</p>
-        </div>
+        <p>&copy; 2026 Guzmán Óptica. Todos los derechos reservados.</p>
     </footer>
 
     <script>
         const contenedor = document.getElementById('contenedor-muestrario');
 
-        const todosLosArmazones = [
-            { archivo: "1000091458.jpg.jpeg", tipo: "sol", material: "acetato" },
-            { archivo: "1000091459.jpg.jpeg", tipo: "sol", material: "acetato" },
-            { archivo: "1000091460.jpg.jpeg", tipo: "sol", material: "metal" },
-            { archivo: "1000091462.jpg.jpeg", tipo: "sol", material: "combinado" },
-            { archivo: "1000091463.jpg.jpeg", tipo: "sol", material: "acetato" },
-            { archivo: "1000122561.jpg.jpeg", tipo: "sol", material: "metal" },
-            { archivo: "1000122564.jpg.jpeg", tipo: "sol", material: "acetato" },
-            { archivo: "1000122565.jpg.jpeg", tipo: "sol", material: "combinado" },
-            { archivo: "1000122566.jpg.jpeg", tipo: "sol", material: "metal" },
-            { archivo: "1000122567.jpg.jpeg", tipo: "sol", material: "acetato" },
-            { archivo: "1000181875.jpg.jpeg", tipo: "sol", material: "acetato" }
-        ];
-
-        function renderizarMuestrario(lista) {
-            contenedor.innerHTML = "";
-            lista.forEach((item, indice) => {
+        // Este bloque lee tus archivos directamente desde tu cuenta de GitHub de forma automática
+        fetch('https://github.com')
+        .then(res => res.json())
+        .then(archivos => {
+            // Busca solo los archivos que terminan en .jpg.jpeg
+            const imagenes = archivos.filter(f => f.name.endsWith('.jpg.jpeg'));
+            
+            // Dibuja en la pantalla cada lente que encuentra
+            imagenes.forEach((item, indice) => {
                 const celda = document.createElement('div');
                 celda.className = 'celda-armazon';
-
                 celda.innerHTML = `
-                    <div class="visor-imagen" onclick="abrirVisor('${item.archivo}')">
-                        <img src="${item.archivo}" alt="Lente">
+                    <div class="visor-imagen" onclick="abrirVisor('${item.name}')">
+                        <img src="${item.name}" alt="Lente">
                     </div>
                     <div class="especificaciones-armazon">Modelo ${indice + 1}</div>
                 `;
                 contenedor.appendChild(celda);
             });
-        }
+        })
+        .catch(err => {
+            contenedor.innerHTML = "<p style='text-align:center;'>Error al cargar los armazones.</p>";
+        });
 
         function abrirVisor(origen) {
-            const modal = document.getElementById("visorModal");
-            const imagen = document.getElementById("imagenAmpliada");
-            modal.style.display = "flex";
-            imagen.src = origen;
+            document.getElementById("visorModal").style.display = "flex";
+            document.getElementById("imagenAmpliada").src = origen;
         }
 
         function cerrarVisor() {
             document.getElementById("visorModal").style.display = "none";
         }
-
-        function filtrarCatalogo(tag) {
-            const botones = document.querySelectorAll('.filtro-opcion');
-            botones.forEach(b => b.classList.remove('seleccionado'));
-            event.target.classList.add('seleccionado');
-
-            if(tag === 'todos') {
-                renderizarMuestrario(todosLosArmazones);
-            } else {
-                const filtrados = todosLosArmazones.filter(item => item.tipo === tag || item.material === tag
-                );
-                renderizarMuestrario(filtrados);
-            }
-        }
-
-        renderizarMuestrario(todosLosArmazones);
     </script>
 </body>
 </html>
