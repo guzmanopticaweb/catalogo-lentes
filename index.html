@@ -42,24 +42,25 @@
     <script src="lista.js"></script>
     
     <script>
-        // Aplicamos tus colores y la tipografía Montserrat con sus grosores de marca
+        // Sistema del Diseñador: Lee y aplica la paleta exacta de configuracion.js de forma obligatoria
         document.getElementById('estilos-dinamicos').innerHTML = `
-            body { font-family: ${configuracionMarca.tipoLetra}; background: ${configuracionMarca.colorFondoGeneral}; margin: 0; padding: 0; text-align: center; color: #222; }
-            header { background: #fff; padding: 40px 20px; border-bottom: 1px solid ${configuracionMarca.colorBordes}; }
-            header h1 { margin: 0 0 10px 0; font-size: 2.2rem; text-transform: uppercase; letter-spacing: 3px; color: ${configuracionMarca.colorPrincipal}; font-weight: 900; }
-            header p { margin: 0; color: ${configuracionMarca.colorTextoSecundario}; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 400; }
+            body { font-family: ${configuracionMarca.tipoLetra}; background: ${configuracionMarca.colorFondoGeneral}; margin: 0; padding: 0; text-align: center; color: #000000; }
+            header { background: #ffffff; padding: 40px 20px; border-bottom: 1px solid #e5e5e5; }
+            header h1 { margin: 0 0 10px 0; font-size: 2.2rem; text-transform: uppercase; letter-spacing: 3px; color: #000000; font-weight: 900; }
+            header p { margin: 0; color: ${configuracionMarca.colorTextoSecundario}; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 400; }
             .area-catalogacion { margin: 30px 20px; }
-            .filtro-opcion { font-family: ${configuracionMarca.tipoLetra}; background: #fff; border: 1px solid ${configuracionMarca.colorBordes}; padding: 8px 18px; margin: 5px; cursor: pointer; border-radius: 4px; font-weight: 400; font-size: 0.85rem; transition: all 0.2s; text-transform: uppercase; }
-            .filtro-opcion.seleccionado, .filtro-opcion:hover { background: ${configuracionMarca.colorPrincipal}; color: #fff; border-color: ${configuracionMarca.colorPrincipal}; }
-            .grilla-catalogo { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; max-width: 1200px; margin: 30px auto; padding: 0 20px; }
-            .celda-armazon { background: ${configuracionMarca.colorFondoCeldas}; border: 1px solid ${configuracionMarca.colorBordes}; padding: 20px; text-align: center; }
-            .visor-imagen img { max-width: 100%; height: 180px; object-fit: contain; cursor: zoom-in; }
+            .filtro-opcion { font-family: ${configuracionMarca.tipoLetra}; background: #ffffff; border: 1px solid #e5e5e5; padding: 8px 18px; margin: 5px; cursor: pointer; border-radius: 4px; font-weight: 400; font-size: 0.85rem; transition: all 0.2s; text-transform: uppercase; color: #000000; }
+            .filtro-opcion.seleccionado, .filtro-opcion:hover { background: ${configuracionMarca.colorPrincipal}; color: #ffffff; border-color: ${configuracionMarca.colorPrincipal}; }
+            .grilla-catalogo { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 25px; max-width: 1200px; margin: 30px auto; padding: 0 20px; }
+            .celda-armazon { background: ${configuracionMarca.colorFondoCeldas}; border: 1px solid ${configuracionMarca.colorBordes}; padding: 25px; text-align: center; border-radius: 8px; transition: transform 0.2s; }
+            .celda-armazon:hover { transform: translateY(-3px); }
+            .visor-imagen img { max-width: 100%; height: 160px; object-fit: contain; cursor: zoom-in; }
             .especificaciones-armazon { margin-top: 15px; font-size: 0.8rem; font-weight: 400; text-transform: uppercase; color: ${configuracionMarca.colorTextoSecundario}; letter-spacing: 0.5px; }
             .modal-visor { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.98); align-items: center; justify-content: center; }
             .modal-imagen { max-width: 90%; max-height: 85%; object-fit: contain; }
             .btn-whatsapp-flotante { position: fixed; bottom: 30px; right: 30px; background-color: #25d366; color: white; border-radius: 50%; width: 55px; height: 55px; display: flex; align-items: center; justify-content: center; font-size: 28px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); z-index: 999; text-decoration: none; transition: transform 0.2s; }
             .btn-whatsapp-flotante:hover { transform: scale(1.05); }
-            footer { background-color: #ffffff; color: ${configuracionMarca.colorPrincipal}; padding: 40px 20px; text-align: center; border-top: 1px solid ${configuracionMarca.colorBordes}; margin-top: 60px; }
+            footer { background-color: #ffffff; color: #000000; padding: 40px 20px; text-align: center; border-top: 1px solid #e5e5e5; margin-top: 60px; }
             .contenedor-redes { margin-bottom: 20px; }
             .contenedor-redes a { color: ${configuracionMarca.colorPrincipal}; font-size: 24px; margin: 0 20px; text-decoration: none; }
             .texto-institucional { font-family: ${configuracionMarca.tipoLetra}; font-size: 0.85rem; color: ${configuracionMarca.colorTextoSecundario}; line-height: 1.6; margin: 0; font-weight: 400; }
