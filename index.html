@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: 'Segoe UI', Roboto, sans-serif;
-            background-color: #f8f9fa; /* Fondo gris claro */
+            background-color: #f8f9fa;
             color: #212529;
             margin: 0;
             padding: 30px 15px;
@@ -28,12 +28,16 @@
             margin: 0 auto;
         }
         .tarjeta-lente {
-            background: #ffffff; /* Fondo blanco para resaltar el lente */
+            background: #ffffff;
             border-radius: 16px;
             border: 1px solid #eaeaea;
             padding: 16px;
             text-align: center;
             box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            transition: transform 0.2s;
+        }
+        .tarjeta-lente:hover {
+            transform: translateY(-5px);
         }
         .tarjeta-lente img {
             max-width: 100%;
@@ -53,33 +57,27 @@
 
     <h1>Catálogo de Lentes de Sol</h1>
 
-    <div class="galeria" id="contenedor-galeria">
-        <!-- Las fotos se cargarán aquí automáticamente -->
-    </div>
+    <div class="galeria" id="contenedor-galeria"></div>
 
     <script>
+        // Lista exacta de tus archivos detectados en la plataforma
+        const fotos = [
+            "1000091458.jpg.jpeg", "1000091459.jpg.jpeg", "1000091460.jpg.jpeg", 
+            "1000091462.jpg.jpeg", "1000091463.jpg.jpeg", "1000122561.jpg.jpeg", 
+            "1000122564.jpg.jpeg", "1000122565.jpg.jpeg", "1000122566.jpg.jpeg", 
+            "1000122567.jpg.jpeg", "1000181875.jpg.jpeg"
+        ];
+
         const galeria = document.getElementById('contenedor-galeria');
-        
-        // Lee los archivos directamente desde la raíz de tu cuenta de GitHub
-        fetch('https://github.com')
-        .then(response => response.json())
-        .then(archivos => {
-            // Filtra para mostrar solo las imágenes .jpg.jpeg que subiste
-            const imagenes = archivos.filter(archivo => archivo.name.endsWith('.jpg.jpeg'));
-            
-            imagenes.forEach((imagen, indice) => {
-                const tarjeta = document.createElement('div');
-                tarjeta.className = 'tarjeta-lente';
-                tarjeta.innerHTML = `
-                    <img src="${imagen.name}" alt="Lente" onerror="this.src='https://placehold.co'">
-                    <div class="nombre-lente">Modelo Lente ${indice + 1}</div>
-                `;
-                galeria.appendChild(tarjeta);
-            });
-        })
-        .catch(err => {
-            console.error("Error cargando fotos:", err);
-            galeria.innerHTML = "<p style='text-align:center;'>Cargando catálogo de lentes...</p>";
+
+        fotos.forEach((nombre, indice) => {
+            const tarjeta = document.createElement('div');
+            tarjeta.className = 'tarjeta-lente';
+            tarjeta.innerHTML = `
+                <img src="${nombre}" alt="Lente" onerror="this.src='https://placehold.co'">
+                <div class="nombre-lente">Modelo Lente ${indice + 1}</div>
+            `;
+            galeria.appendChild(tarjeta);
         });
     </script>
 
